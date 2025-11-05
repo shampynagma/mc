@@ -8,7 +8,7 @@ void main(void)
 {
     while(1) //INFINITE LOOP
     {
-        P1=0x0F0;
+        P1=0x0F;
         delay();
         P1=0x0F;
         delay();
@@ -52,4 +52,5 @@ void delay()
     While (TF0==0);
     TR0=0;
     TF0=0;
+
 }
