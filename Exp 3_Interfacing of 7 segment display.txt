@@ -1,0 +1,27 @@
+Interfacing of 7 segment display
+
+#include <reg51.h>
+
+void delay() {
+    int i;
+    for(i=0; i<=10; i++){
+        TMOD = 0x01;
+        TH0 = 0x00;
+        TL0 = 0x00;
+        TR0 = 1;
+        while(TF0 == 0);
+        TR0 = 0;
+        TF0 = 0;
+    }
+}
+
+void main() {
+    unsigned char array[6] = {0x3F, 0x06, 0x5B, 0x4F, 0x66, 0x6D};
+    while (1) {
+        int i;
+        for(i=0; i<=6; i++){
+            P2 = array[i];
+            delay();
+        }
+    }
+}

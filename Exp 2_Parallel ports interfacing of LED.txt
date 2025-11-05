@@ -1,0 +1,55 @@
+a) The program for blinking of 8 LED's interfaced with port P1 of 8051.
+
+#include <reg51.h>
+
+void delay();
+
+void main(void)
+{
+    while(1) //INFINITE LOOP
+    {
+        P1=0x0F0;
+        delay();
+        P1=0x0F;
+        delay();
+    }
+}
+
+void delay()
+{
+    TMOD=0x01;
+    TH0=0xFF;
+    TL0=0x0A;
+    TR0=1;
+    While (TF0==0);
+    TR0=0;
+    TF0=0;
+}
+
+b) The program for toggling of 8 LED's interfaced with port P1 of 8051.
+
+#include <reg51.h>
+
+void delay();
+
+void main(void)
+{
+    while(1) //INFINITE LOOP
+    {
+        P1=0xAA;
+        delay();
+        P1=0x00;
+        delay();
+    }
+}
+
+void delay()
+{
+    TMOD=0x01;
+    TH0=0xFF;
+    TL0=0x0A;
+    TR0=1;
+    While (TF0==0);
+    TR0=0;
+    TF0=0;
+}

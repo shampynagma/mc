@@ -1,0 +1,56 @@
+LCD interfacing with PIC
+
+#include<p18f4550.h>
+#define LCD_EN PORTCbits.RC1
+#define LCD_RS PORTCbits.RC0
+void delay() 
+{
+unsigned int i;
+for (i=0;i<5000;i++);
+}
+unsigned char string1[]={'E','&','T','C'};
+void Sendcommand(unsigned char command)
+{
+    LCD_RS=0;
+    delay();
+    LCD_EN=1; 
+    delay();
+    PORTB= command; 
+    delay();
+    LCD_EN=0;
+    delay();
+
+}
+
+void Senddata(unsigned char data)
+{
+    LCD_RS=1;
+    delay(); 
+    LCD_EN=1;
+    delay();
+    PORTB= data;
+    delay();
+    LCD_EN=0;
+    delay();
+}
+
+void main()
+{
+    unsigned char i,j;
+    TRISB=0x00;
+    TRISCbits.RC1=0;
+    TRISCbits.RC0=0;
+    // Initialize LCD
+    Sendcommand(0x38);
+    Sendcommand(0x0E);
+    Sendcommand(0x01);
+    while(1)
+    {
+    Sendcommand(0x80);
+    for(i=0;i<4;i++)
+    {
+        j=string1[i];
+        Senddata(j); 
+    }
+    }
+}

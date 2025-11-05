@@ -1,0 +1,73 @@
+LCD interfacing with 8051
+
+#include<reg51.h>
+sbit rs=P2^2;
+sbit rw=  P2^1;
+sbit en= P2^0;                                      
+void DelayMs(delay)
+{
+    int i,j;
+    for(i=0;i<delay;i++)
+    {
+     for(j=0;j<100;j++);
+    }
+ 
+}
+void write_lcd_data(value)
+{
+    P1=value;
+    DelayMs(250);
+    rs=1;
+    rw=0;
+    en=1;
+    DelayMs(10);
+    en=0;
+}
+  void write_lcd_command(value)
+{
+    P1=value;
+    DelayMs(250);
+    rs=0;
+    rw=0;
+    en=1;
+    DelayMs(10);
+    en=0;
+}
+void main(void)
+{
+    P1=0x00;
+    P2=0x00;
+    write_lcd_command(0x38);		// function set
+    write_lcd_command(0x08);	 	// display off
+    write_lcd_command(0x01);		//display clear
+    write_lcd_command(0x06);		//entry mode set
+    //write_lcd_command(0x08);
+    //write_lcd_command(0x0C);
+    write_lcd_command(0x0F);    	  // display on
+  
+    write_lcd_command(0x81);		 // set address counter value
+    write_lcd_data('8');
+    write_lcd_data('0');
+    write_lcd_data('5');
+    write_lcd_data('1');
+    write_lcd_data('+');
+    write_lcd_data('L');
+    write_lcd_data('C');
+    write_lcd_data('D');
+    
+    write_lcd_command(0xc0);		 //set address counter value
+    write_lcd_data('E');
+    write_lcd_data('&');
+    write_lcd_data('T');
+    write_lcd_data('C');
+    write_lcd_data('d');
+    write_lcd_data('e');
+    write_lcd_data('p');
+    write_lcd_data('t');
+ 
+        // DelayMs(250);
+		while(1)
+		{
+
+		}
+}
