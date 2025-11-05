@@ -1,5 +1,4 @@
 *C program to add two 8 bit numbers
-
 #include<reg51.h>
 void main(void)
 {
@@ -10,8 +9,8 @@ void main(void)
     z=x+y;
     P1=z;
 }
-*C program to subtract two 8 bit numbers
 
+*C program to subtract two 8 bit numbers
 #include<reg51.h>
 void main(void)
 {
@@ -22,8 +21,8 @@ void main(void)
     z=x-y;
     P1=z;
 }
-*C program to multiply two 8 bit numbers
 
+*C program to multiply two 8 bit numbers
 #include<reg51.h>
 void main(void)
 {
@@ -36,7 +35,6 @@ void main(void)
 }
 
 *C program to divide two 8 bit numbers
-
 #include<reg51.h>
 void main(void)
 {
@@ -46,4 +44,5 @@ void main(void)
     P1=0x00;
     z=x/y;
     P1=z;
+
 }
